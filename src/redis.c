@@ -2157,6 +2157,7 @@ void initServer() {
      * domain sockets. */
     // 为 TCP 连接关联连接应答（accept）处理器
     // 用于接受并应答客户端的 connect() 调用
+        redisLog(LJM_IFNO,"****** listen ip fd count=%d",server.ipfd_count);
     for (j = 0; j < server.ipfd_count; j++) {
         if (aeCreateFileEvent(server.el, server.ipfd[j], AE_READABLE,
             acceptTcpHandler,NULL) == AE_ERR)

@@ -148,7 +148,7 @@ static void aeApiDelEvent(aeEventLoop *eventLoop, int fd, int delmask) {
 }
 
 /*
- * 获取可执行事件
+ * 获取可执行事件 放到 eventLoop中
  */
 static int aeApiPoll(aeEventLoop *eventLoop, struct timeval *tvp) {
     aeApiState *state = eventLoop->apidata;

@@ -294,6 +294,8 @@
 #define REDIS_VERBOSE 1
 #define REDIS_NOTICE 2
 #define REDIS_WARNING 3
+#define LJM_IFNO 4
+// ljm
 #define REDIS_LOG_RAW (1<<10) /* Modifier to log without timestamp */
 #define REDIS_DEFAULT_VERBOSITY REDIS_NOTICE
 
