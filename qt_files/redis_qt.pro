@@ -253,3 +253,7 @@ HEADERS += \
 
 INCLUDEPATH +=\
 ../deps/lua/src
+
+OTHER_FILES += \
+    ../docs/linux操作系统.docx \
+    ../docs/redis笔记.docx
