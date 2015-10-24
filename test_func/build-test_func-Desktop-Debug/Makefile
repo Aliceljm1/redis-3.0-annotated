@@ -47,10 +47,14 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../test_func/main.c \
 		../../src/sds.c \
-		../../src/zmalloc.c 
+		../../src/zmalloc.c \
+		../../src/dict.c \
+		../test_func/redis_cfile.c 
 OBJECTS       = main.o \
 		sds.o \
-		zmalloc.o
+		zmalloc.o \
+		dict.o \
+		redis_cfile.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -105,7 +109,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../test_func/test_func.pro ../test_func/main.c \
 		../../src/sds.c \
-		../../src/zmalloc.c
+		../../src/zmalloc.c \
+		../../src/dict.c \
+		../test_func/redis_cfile.c
 QMAKE_TARGET  = test_func
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = test_func
@@ -279,7 +285,10 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../test_func/main.c ../../src/sds.h
+main.o: ../test_func/main.c ../../src/sds.h \
+		../../src/dict.h \
+		../test_func/redisassert.h \
+		../test_func/redis_cfile.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o main.o ../test_func/main.c
 
 sds.o: ../../src/sds.c ../../src/sds.h \
@@ -290,6 +299,15 @@ sds.o: ../../src/sds.c ../../src/sds.h \
 zmalloc.o: ../../src/zmalloc.c ../../src/config.h \
 		../../src/zmalloc.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o zmalloc.o ../../src/zmalloc.c
+
+dict.o: ../../src/dict.c ../../src/fmacros.h \
+		../../src/dict.h \
+		../../src/zmalloc.h \
+		../test_func/redisassert.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o dict.o ../../src/dict.c
+
+redis_cfile.o: ../test_func/redis_cfile.c ../test_func/redis_cfile.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o redis_cfile.o ../test_func/redis_cfile.c
 
 ####### Install
 
